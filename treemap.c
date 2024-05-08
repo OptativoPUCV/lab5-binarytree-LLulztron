@@ -49,26 +49,32 @@ TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2))
 void insertTreeMap(TreeMap * tree, void* key, void * value) 
 {
     if (tree == NULL || key == NULL || value == NULL) return;
-    TreeNode * aux = tree -> root;
-    TreeNode * parent = NULL;
-    while (aux != NULL) {
-        parent = aux;
-        if (is_equal(tree, key, aux -> pair -> key)) return;
-        if (tree -> lower_than(key, aux -> pair -> key) == 1) {
-            aux = aux -> left;
-        } else {
-            aux = aux -> right;
-        }
-    }
-    TreeNode * new = createTreeNode(key, value);
-    new -> parent = parent;
-    if (parent == NULL) {
-        tree -> root = new;
+    if (tree -> root == NULL) {
+        tree -> root = createTreeNode(key, value);
+        tree -> current = tree -> root;
     } else {
-        if (tree -> lower_than(key, parent -> pair -> key) == 1) {
-            parent -> left = new;
-        } else {
-            parent -> right = new;
+        TreeNode *aux = tree -> root;
+        while (aux != NULL) {
+            if (is_equal(tree, key, aux -> pair -> key)) return;
+            if (tree -> lower_than(key, aux -> pair -> key) == 1) {
+                if (aux -> left == NULL) {
+                    aux -> left = createTreeNode(key, value);
+                    aux -> left -> parent = aux;
+                    tree -> current = aux -> left;
+                    return;
+                } else {
+                    aux = aux -> left;
+                }
+            } else {
+                if (aux -> right == NULL) {
+                    aux -> right = createTreeNode(key, value);
+                    aux -> right -> parent = aux;
+                    tree -> current = aux -> right;
+                    return;
+                } else {
+                    aux = aux -> right;
+                }
+            }
         }
     }
 }
@@ -113,9 +119,6 @@ void removeNode(TreeMap * tree, TreeNode* node) {
             child -> parent = parent;
         }
     }
-    free(node -> pair -> key);
-    free(node -> pair -> value);
-    free(node -> pair);
     free(node);
 }
 
