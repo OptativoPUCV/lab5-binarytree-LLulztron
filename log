@@ -122,3 +122,15 @@ test.c:503:5: error: ‘main’ defined but not used [-Werror=unused-function]
 cc1: all warnings being treated as errors
 Compilation failed
 6051a31
+Wed 08 May 2024 09:08:28 PM UTC: 
+ treemap.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+In file included from test.c:4:
+treemap.c: In function ‘removeNode’:
+treemap.c:121:9: error: ‘chiild’ undeclared (first use in this function); did you mean ‘child’?
+  121 |         chiild -> parent = node -> parent;
+      |         ^~~~~~
+      |         child
+treemap.c:121:9: note: each undeclared identifier is reported only once for each function it appears in
+Compilation failed
+ce6810c
