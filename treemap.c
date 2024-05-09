@@ -208,9 +208,10 @@ Pair * nextTreeMap(TreeMap * tree) {
         return aux -> pair;
     } else {
         while (aux -> parent != NULL && aux -> parent -> right == aux) {
-            aux = aux -> parent;
-            tree -> current = aux -> parent;
-            return aux -> parent -> pair;
+            if (aux -> parent != NULL && aux -> parent -> pair != NULL) {
+                tree -> current = aux -> parent;
+                return aux -> parent -> pair;
+            }
         }
     }
     return NULL;
