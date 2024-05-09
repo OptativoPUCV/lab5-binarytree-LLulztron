@@ -134,3 +134,9 @@ treemap.c:121:9: error: ‘chiild’ undeclared (first use in this function); di
 treemap.c:121:9: note: each undeclared identifier is reported only once for each function it appears in
 Compilation failed
 ce6810c
+Thu 09 May 2024 06:28:44 PM UTC: 
+ treemap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests:  22|2
+total_score: 50/70
+9108567
